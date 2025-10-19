@@ -336,3 +336,10 @@ if __name__ == '__main__':
     # 云端部署时关闭debug模式
     debug_mode = os.environ.get('FLASK_ENV') != 'production'
     app.run(debug=debug_mode, host='0.0.0.0', port=PORT)
+
+# Vercel WSGI 适配
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0', port=5001)
+else:
+    # 当作为模块导入时（Vercel环境）
+    application = app
