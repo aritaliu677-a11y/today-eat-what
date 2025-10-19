@@ -1,0 +1,425 @@
+/* 重置样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Google Sans', 'PingFang SC', 'Microsoft YaHei', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* 添加动态背景效果 */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+    z-index: -1;
+    animation: backgroundShift 20s ease-in-out infinite;
+}
+
+@keyframes backgroundShift {
+    0%, 100% { transform: translateX(0) translateY(0); }
+    25% { transform: translateX(-20px) translateY(-10px); }
+    50% { transform: translateX(20px) translateY(10px); }
+    75% { transform: translateX(-10px) translateY(20px); }
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+}
+
+/* 头部样式 - Google风格 */
+header {
+    text-align: center;
+    margin-bottom: 60px;
+    color: white;
+}
+
+header h1 {
+    font-size: 3.5rem;
+    font-weight: 300;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    letter-spacing: -1px;
+    background: linear-gradient(45deg, #ffffff, #f0f0f0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+header p {
+    font-size: 1.2rem;
+    opacity: 0.8;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+/* 主要内容 */
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+
+/* 结果区域 */
+.result-section {
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 加载动画 - Google Material Design */
+.loading {
+    text-align: center;
+    color: white;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255,255,255,0.2);
+    border-top: 3px solid white;
+    border-radius: 50%;
+    animation: spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    margin: 0 auto 24px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading p {
+    font-size: 1.1rem;
+    font-weight: 400;
+    opacity: 0.9;
+    letter-spacing: 0.25px;
+}
+
+/* 结果卡片 */
+.result {
+    width: 100%;
+}
+
+.food-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 
+        0 8px 32px rgba(0,0,0,0.1),
+        0 0 0 1px rgba(255,255,255,0.2);
+    text-align: center;
+    animation: slideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255,255,255,0.3);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.food-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #4285f4, #ea4335, #fbbc04, #34a853);
+    border-radius: 16px 16px 0 0;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 卡片悬停效果 - Google Material Design */
+.food-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 
+        0 12px 40px rgba(0,0,0,0.15),
+        0 0 0 1px rgba(255,255,255,0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 餐厅名称悬停效果 */
+.food-card h2:hover {
+    color: #1557b0;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 菜品名称悬停效果 */
+.food-card h3:hover {
+    color: #1557b0;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 描述悬停效果 - 优雅版本 */
+.food-card p:hover {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(26, 115, 232, 0.15);
+    transform: translateY(-3px);
+    box-shadow: 
+        0 8px 30px rgba(0,0,0,0.1),
+        inset 0 1px 0 rgba(255,255,255,0.9);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.food-card p:hover::before {
+    width: 60px;
+    background: linear-gradient(90deg, #1a73e8, #ea4335, #34a853);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 餐厅名称样式 - Google Material Design */
+.food-card h2 {
+    font-size: 2.4rem;
+    color: #202124;
+    margin-bottom: 12px;
+    font-weight: 400;
+    letter-spacing: -0.5px;
+    position: relative;
+    line-height: 1.2;
+}
+
+/* 去掉餐厅名称图标 */
+
+/* 菜品名称样式 - Google Material Design */
+.food-card h3 {
+    font-size: 2rem;
+    color: #1a73e8;
+    margin-bottom: 24px;
+    font-weight: 500;
+    position: relative;
+    line-height: 1.3;
+}
+
+/* 去掉菜品名称图标 */
+
+/* 描述样式 - 优雅版本 */
+.food-card p {
+    font-size: 1.1rem;
+    color: #5f6368;
+    margin-bottom: 32px;
+    line-height: 1.8;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 28px 32px;
+    border-radius: 20px;
+    border: 1px solid rgba(26, 115, 232, 0.08);
+    box-shadow: 
+        0 4px 20px rgba(0,0,0,0.06),
+        inset 0 1px 0 rgba(255,255,255,0.8);
+    position: relative;
+    font-weight: 400;
+    font-style: italic;
+    text-align: center;
+    max-width: 100%;
+    word-wrap: break-word;
+    backdrop-filter: blur(10px);
+}
+
+/* 添加描述装饰线 */
+.food-card p::before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, #1a73e8, #34a853);
+    border-radius: 1px;
+}
+
+/* 去掉描述图标 */
+
+.food-tags {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.tag {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* 按钮样式 */
+.actions {
+    text-align: center;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 120px;
+    text-transform: none;
+    letter-spacing: 0.25px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn.primary {
+    background: #1a73e8;
+    color: white;
+    box-shadow: 0 2px 8px rgba(26, 115, 232, 0.3);
+}
+
+.btn.primary:hover {
+    background: #1557b0;
+    box-shadow: 0 4px 12px rgba(26, 115, 232, 0.4);
+    transform: translateY(-1px);
+}
+
+.btn.primary:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(26, 115, 232, 0.3);
+}
+
+.btn.secondary {
+    background: rgba(255, 255, 255, 0.9);
+    color: #1a73e8;
+    border: 1px solid #dadce0;
+    backdrop-filter: blur(10px);
+}
+
+.btn.secondary:hover {
+    background: rgba(26, 115, 232, 0.08);
+    border-color: #1a73e8;
+    transform: translateY(-1px);
+}
+
+.btn.secondary:active {
+    transform: translateY(0);
+    background: rgba(26, 115, 232, 0.12);
+}
+
+/* 隐藏类 */
+.hidden {
+    display: none !important;
+}
+
+/* 页脚 */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    color: white;
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
+
+/* 响应式设计 - Google Material Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px 16px;
+    }
+    
+    header h1 {
+        font-size: 2.5rem;
+        letter-spacing: -0.5px;
+    }
+    
+    header p {
+        font-size: 1rem;
+    }
+    
+    .food-card {
+        padding: 24px 20px;
+        border-radius: 12px;
+    }
+    
+    .food-card h2 {
+        font-size: 1.8rem;
+        letter-spacing: -0.25px;
+    }
+    
+    .food-card h3 {
+        font-size: 1.5rem;
+    }
+    
+    .food-card p {
+        font-size: 1rem;
+        padding: 20px 24px;
+        margin-bottom: 24px;
+        border-radius: 12px;
+    }
+    
+    .actions {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+    
+    .btn {
+        width: 100%;
+        max-width: 280px;
+        padding: 14px 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .food-card {
+        padding: 20px 16px;
+    }
+    
+    .food-card h2 {
+        font-size: 1.6rem;
+    }
+    
+    .food-card h3 {
+        font-size: 1.3rem;
+    }
+    
+    .food-card p {
+        font-size: 0.9rem;
+        padding: 18px 20px;
+        border-radius: 12px;
+    }
+}
